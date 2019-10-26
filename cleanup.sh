@@ -68,7 +68,7 @@ do
 	#make a file with the date and the average of the temperature of thaht day
 	awk -F ";" -v date="$Date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>${oneDayTemp_allEntries}
 	rm ${oneDay}
-	echo $next_date
+	#echo $next_date
 	Date=${next_date}
 done
 echo "Created file" $oneDayTemp_allEntries "with average temperature results of each day, containing low and high quality results."
