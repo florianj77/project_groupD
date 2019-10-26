@@ -44,12 +44,12 @@ days=$(($diff/(60*60*24)+1))
 touch oneDay.txt
 oneDay=oneDay.txt
 #Make a file containing the average tmeperature of a day, Format: date averageTemperature
-if [[ -f oneDayTemp_allEntries.txt ]]; then
-	rm oneDayTemp_allEntries.txt
+if [[ -f oneDayTemp_allEntries_${file}.txt ]]; then
+	rm oneDayTemp_allEntries_${file}.txt
 fi
 
-touch oneDayTemp_allEntries.txt
-oneDayTemp_allEntries=oneDayTemp_allEntries.txt
+touch oneDayTemp_allEntries_${file}.txt
+oneDayTemp_allEntries=oneDayTemp_allEntries_${file}.txt
 echo "generating file, this can take a few minutes..."
 
 #increase starting date by one day for each i
@@ -71,7 +71,7 @@ echo "Created file" $oneDayTemp_allEntries "with average temperature results of 
 #temporary working files
 touch tmpFile_highQuality.txt
 tmpFile_highQuality=tmpFile_highQuality.txt
-touch oneDay_highQuality.txt
+oneDay_highQuality.txt
 oneDay_highQuality=oneDay_highQuality.txt
 
 #Get only good quality results
@@ -93,12 +93,12 @@ diff_highQuality=$(($date2_highQuality-$date1_highQuality))
 days_highQuality=$(($diff_highQuality/(60*60*24)+1))
 #echo $days
 #Make a file containing the average tmeperature of a day, Format: date averageTemperature
-if [[ -f oneDayTemp_highQuality.txt ]]; then
-	rm oneDayTemp_highQuality.txt
+if [[ -f oneDayTemp_highQuality_${file}.txt ]]; then
+	rm oneDayTemp_highQuality_${file}.txt
 fi
 
-touch oneDayTemp_highQuality.txt
-oneDayTemp_highQuality=oneDayTemp_highQuality.txt
+touch oneDayTemp_highQuality_${file}.txt
+oneDayTemp_highQuality=oneDayTemp_highQuality_${file}.txt
 
 echo "generating next file, this can take a few minutes..."
 
