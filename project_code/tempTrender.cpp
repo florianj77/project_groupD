@@ -14,24 +14,25 @@
 tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
 	cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
+	fileToPath=filePath;
 }
 
-//make function to give hst with temp on given day for each year
+//make function to give hist with temp on given day for each year
 void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	cout<<"Month "<<monthToCalculate<<endl;
 	cout<<"Day "<<dayToCalculate<<endl;
-	
+	cout<<fileToPath<<endl;
 	//make hist
 	TH1I* hist = new TH1I("temperature", "Temperature;Temperature[#circC];Entries", 300, -20, 40);
-	hist->SetFillColor(kRed + 1);
-	//system("./preparefile.sh");
-	//open file (file path missing to be implemented correctly)
-	ifstream file("/home/courseuser/project_groupD/project_groupD/easyToRead1200_Lund.txt");
+	hist->SetFillColor(4);
+	hist->SetTitle("Average temperature on a day");
 	
+	//open file (file path missing to be implemented correctly)
+	ifstream file(fileToPath.c_str());
 	
 	//count number of lines to know array size
 	int numLines=0;
-	while( file.good()){
+	while( file.good() ){
 		string line;
 		getline(file, line);
 		++numLines;
@@ -39,7 +40,7 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	file.close();
 
 	//read file to get temperature data
-	ifstream file2("/home/courseuser/project_groupD/project_groupD/easyToRead1200_Lund.txt");
+	ifstream file2(fileToPath.c_str());
 	while( file2.good()){
 		//help variables
 		int year, month, day;
