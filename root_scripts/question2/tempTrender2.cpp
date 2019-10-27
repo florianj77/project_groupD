@@ -31,7 +31,7 @@ void tempTrender::hotCold(){
 	mg -> Add(graph);
 	mg -> Add(graph1);
 	mg->Draw("a");
-	c1->SaveAs("../../pictures/Question2.jpg");
+	c1->SaveAs("../../pictures/newpicture.jpg");
 	//graph->CreateTMultiGraph(graph, graph1);
 	
 	//graph->Draw(graph);

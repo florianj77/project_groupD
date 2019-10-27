@@ -64,34 +64,5 @@ void tempTrender::moonTemp (){
 
 	TCanvas* can = new TCanvas();
 	hist->Draw();
-	can->SaveAs("../../pictures/moon.jpg");
+	can->SaveAs("../../pictures/newpicture.jpg");
 }
-/*		
-		//just store the temperatures for the given month and day 
-		if(month_abs == monthToCalculate && day_abs == dayToCalculate){
-				//cout<<year<<" "<<month<<" "<<day<<" "<<temp[numLines]<<endl;
-				temp[nt]=temp[numLines];
-				//cout<<temp[nt]<<endl;
-				//make hist
-				hist->Fill(temp[nt]); 
-			}
-		}
-	}
-	double mean = hist->GetMean(); //The mean of the distribution
-	double stdev = hist->GetRMS(); //The standard deviation
-	TCanvas* can = new TCanvas();
-	hist->Draw();
-	
-//save the graph as a picture called by the name of the city
-	if (city=="Lund"){
-		can->SaveAs("Lund.jpg");
-	}
-	if (city=="Lulea"){
-		can->SaveAs("Lulea.jpg");
-	}
-	if (city=="Karlstad"){
-		can->SaveAs("Karlstad.jpg");
-	}
-		
-}
-*/

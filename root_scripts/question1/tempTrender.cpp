@@ -77,15 +77,7 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	TCanvas* can = new TCanvas();
 	hist->Draw();
 	
-//save the graph as a picture called by the name of the city
-	if (city=="Lund"){
-		can->SaveAs("../../pictures/Lund.jpg");
-	}
-	if (city=="Lulea"){
-		can->SaveAs("Lulea.jpg");
-	}
-	if (city=="Karlstad"){
-		can->SaveAs("Karlstad.jpg");
-	}
-		
+//save the graph as a picture 
+	can->SaveAs("../../pictures/newpicture.jpg");
+	
 }
