@@ -137,7 +137,7 @@ rm gesamt
 rm moonTemp_temp_${city}.txt
 
 awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> moonTemp_${city}.txt
-
+#
 rm moonTemp1_${city}.txt
 
 for i in {0..11}
