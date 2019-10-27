@@ -23,6 +23,7 @@ final_date=`awk 'END {print $1}' moonphases_2014.txt`
 #next_date="2014-01-16"
 lines=`awk 'END{print NR}' moonphases_2014.txt`
 range=`awk -v lines=${lines} 'BEGIN{print ((lines-2)/2)-1}'`
+echo $range
 for i in $(seq 0 $range)
 do
 	next_date=`awk -v pattern="${Date}" '$0 ~ pattern {getline; print}' moonphases_2014.txt`
