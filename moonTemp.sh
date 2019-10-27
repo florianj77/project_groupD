@@ -23,6 +23,7 @@ final_date=`awk 'END {print $1}' moonphases_2014.txt`
 #next_date="2014-01-16"
 lines=`awk 'END{print NR}' moonphases_2014.txt`
 range=`awk -v lines=${lines} 'BEGIN{print ((lines-2)/2)-1}'`
+echo $range
 for i in $(seq 0 $range)
 do
 	next_date=`awk -v pattern="${Date}" '$0 ~ pattern {getline; print}' moonphases_2014.txt`
@@ -31,6 +32,8 @@ do
 	new_moon=`awk -v pattern="${next_date}" '$0 ~ pattern {getline; print}' moonphases_2014.txt`
 	#test1=$(date +%Y-%m-%d -d "$Date +1 year")
 	test2=$(date +%Y-%m-%d -d "$new_moon -1 day")
+	#echo "new_moon" $new_moon
+	#echo "test2" $test2
 	#echo ${test1}
 	#echo ${test2}
 	#get the min and max temp of the time span between Date and next_date
@@ -130,11 +133,13 @@ rm tempfile1_$i
 rm outfile_$i
 done
 
-paste -d ' ' moonTemp_temp_${city}.txt gesamt >> moonTemp_Lund.txt
+paste -d ' ' moonTemp_temp_${city}.txt gesamt >> moonTemp1_${city}.txt
 rm gesamt
 rm moonTemp_temp_${city}.txt
 
+awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> moonTemp_${city}.txt
 
+rm moonTemp1_${city}.txt
 
 for i in {0..11}
 do
