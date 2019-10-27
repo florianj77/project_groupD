@@ -3,7 +3,7 @@
 #include <iostream>
 
 void project() {
-	string pathToFile = "/home/courseuser/project_groupD-master/oneDayTemp_allEntries_Lund.txt"; //Put the path to data file, Southern Sweden
+	string pathToFile = "/home/courseuser/project_groupD/project_groupD/oneDayTemp_allEntries_Lund.txt"; //Put the path to data file, Southern Sweden
 	//string pathToFile = "/home/courseuser/project_groupD-master/oneDayTemp_allEntries_Lulea.txt"; //Northern Sweden
 	//string pathToFile = "/home/courseuser/project_groupD-master/oneDayTemp_allEntries_Karlstad.txt"; //Center of Sweden
 	//cout<<"File path = "<<pathToFile<<endl;
@@ -15,4 +15,5 @@ void project() {
 	//t.tempPerDay();
 	//t.hotCold();
 	//t.tempPerYear(2050);
+	
 }

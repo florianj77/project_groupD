@@ -89,4 +89,3 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	}
 		
 }
-
