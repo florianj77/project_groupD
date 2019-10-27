@@ -45,5 +45,13 @@
 ./tempTrender2_cpp.so: /usr/include/root/TPoint.h
 ./tempTrender2_cpp.so: /usr/include/root/TAttCanvas.h
 ./tempTrender2_cpp.so: /usr/include/root/TCanvasImp.h
+./tempTrender2_cpp.so: /usr/include/root/TMultiGraph.h
+./tempTrender2_cpp.so: /usr/include/root/TF1.h /usr/include/root/TFormula.h
+./tempTrender2_cpp.so: /usr/include/root/TBits.h
+./tempTrender2_cpp.so: /usr/include/root/TObjArray.h
+./tempTrender2_cpp.so: /usr/include/root/TSeqCollection.h
+./tempTrender2_cpp.so: /usr/include/root/TCollection.h
+./tempTrender2_cpp.so: /usr/include/root/TIterator.h
+./tempTrender2_cpp.so: /usr/include/root/Math/ParamFunctor.h
 ./tempTrender2_cpp.so: /usr/include/root/cintdictversion.h /usr/include/root/RVersion.h
 tempTrender2_cpp__ROOTBUILDVERSION= 5.34/30
