@@ -254,8 +254,9 @@ elif [ ${Option} == "3" ]; then
 	fi
 	
 	#run corresponding root script
-	
-	moonTemp_final ${city} ${Quality}
+	cd ${base}/bash_scripts
+	./moonTemp.sh ${city} ${Quality}
+	cd ${base}
 	cd ${base}/root_scripts/question${Option}
 	echo "
 	#include \"tempTrender_moon.h\"
