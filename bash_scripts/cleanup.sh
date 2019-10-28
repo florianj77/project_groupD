@@ -79,7 +79,23 @@ then
 		 
 		#echo $next_date
 		Date=${next_date}
-		#if [ $Date == ]
+		#echo $Date
+		#if [ $Date == "1970-01-01" ]; then
+		#	echo "Your are in the 70s!"
+		#fi
+		#if [ $Date == "1980-01-01" ]; then
+		#	echo "Your are in the 80s!"
+		#fi
+		#if [ $Date == "1990-01-01" ]; then
+		#	echo "Your are in the 90s!"
+		#fi
+		#if [ $Date == "2000-01-01" ]; then
+		#	echo "Your are in the 00s!"
+		#fi
+		#if [ $Date == "2010-01-01" ]; then
+		#	echo "Your are in the 10s!"
+		#fi
+		
 	done
 	sed '/-nan/d' temporary_all > ${oneDayTemp_allEntries}
 	rm temporary_all

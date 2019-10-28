@@ -9,7 +9,7 @@ EX1: Average Temperature for a given day from 1961-2014 [1]
 
 EX2: Hottest and coldest Temperature from 1961-2014 [2]
 
-EX2: Compare the Weather with the moon cycle in Lund from 1961-2014 [3]
+EX3: Compare the Weather with the moon cycle in Lund from 1961-2014 [3]
 
 Exit: Exit the program [4]"
 
@@ -50,7 +50,7 @@ if [ ${Option} == "1" ]; then
 		exit 1
 	fi
 	
-	output=Q${1}_${city}_${Quality}.jpg
+	
 	
 	#cleanup/prepare data
 	
@@ -68,6 +68,10 @@ if [ ${Option} == "1" ]; then
 	#run corresponding root script
 	
 	cd ${base}/root_scripts/question${Option}
+	echo "Please specify the month [1-12]"
+	read month
+	echo "Please specify the day"
+	read day
 	echo "
 	#include \"tempTrender.h\"
 	#include <string>
@@ -79,7 +83,7 @@ if [ ${Option} == "1" ]; then
 	
 		tempTrender t(pathToFile); //Instantiate your analysis object
 		
-		t.tempOnDay(12, 24); //Call implemented function
+		t.tempOnDay(${month}, ${day}); //Call implemented function
 		//t.tempOnDay(235);
 		//t.tempPerDay();
 		//t.hotCold();
@@ -88,6 +92,7 @@ if [ ${Option} == "1" ]; then
 	}" > project.cpp
 	root
 	#root -b -l -q 'project();'
+	output=Q${Option}_${city}_${Quality}_${month}_${day}.jpg
 	cd ${base}/pictures
 	mv newpicture.jpg ${output}
 	xdg-open ${output}
@@ -127,7 +132,7 @@ elif [ ${Option} -eq "2" ]; then
 		exit 1
 	fi
 
-	output=Q${1}_${city}_${Quality}.jpg
+	output=Q${Option}_${city}_${Quality}.jpg
 	
 	#cleanup/prepare data
 	
@@ -240,12 +245,12 @@ elif [ ${Option} == "3" ]; then
 		exit 1
 	fi
 	
-	output=Q${1}_${city}_${Quality}.jpg
+	output=Q${Option}_${city}_${Quality}.jpg
 	
 	#cleanup/prepare data
 	
 	if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
-		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
+		echo "Prepare the date for ${city} (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
 		./cleanup.sh ${city} ${Quality}
 		cd ${base}
@@ -254,9 +259,15 @@ elif [ ${Option} == "3" ]; then
 	fi
 	
 	#run corresponding root script
-	cd ${base}/bash_scripts
-	./moonTemp.sh ${city} ${Quality}
-	cd ${base}
+	if [[ ! -f ${base}/data_files/moonTemp_${Quality}_${city}.txt ]]; then
+		echo "Prepare the file for ${city}: "
+		cd ${base}/bash_scripts
+		./moonTemp.sh ${city} ${Quality}
+		cd ${base}
+	else
+		echo "Data file exist already"
+	fi
+	
 	cd ${base}/root_scripts/question${Option}
 	echo "
 	#include \"tempTrender_moon.h\"
@@ -277,6 +288,7 @@ elif [ ${Option} == "3" ]; then
 	root
 	#project()
 	#.q
+	cd ${base}/pictures
 	mv newpicture.jpg ${output}
 	xdg-open ${output} 
 else 

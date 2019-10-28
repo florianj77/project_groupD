@@ -5,13 +5,13 @@ Quality=$2
 
 path=../data_files
 
-echo "creating moonTemp_${city}.txt file"
+echo "creating moonTemp_${Quality}_${city}.txt file"
 
 if [[ ${Quality} == "highQuality" ]];
 then
 
-	touch ${path}/moonTemp_${city}_${Quality}.txt
-	output=${path}/moonTemp_${city}_${Quality}.txt
+	touch ${path}/moonTemp_${Quality}_${city}.txt
+	output=${path}/moonTemp_${Quality}_${city}.txt
 	Date=`awk 'NR==2 {print $1}' ${path}/moonphases_2014.txt`
 	final_date=`awk 'END {print $1}' ${path}/moonphases_2014.txt`
 	#next_date="2014-01-16"
@@ -49,7 +49,7 @@ then
 		while [[ "${following_day}" < "${test2}" ]]
 		do 
 			following_day=$(date +%Y-%m-%d -d "$Date +$count day")
-			egrep ^${following_day} ${path}/oneDayTemp_allEntries_${city}.txt>>testfile_$i.txt	
+			egrep ^${following_day} ${path}/oneDayTemp_${Quality}_${city}.txt>>testfile_$i.txt	
 			count=$((count+1))
 		done
 		#length=`wc -l <testfile_$i.txt`
@@ -91,21 +91,21 @@ then
 	lines=`wc -l <new_$i`
 	awk -v lin="${lines}" '{if(NR==1) print $3=0; else  print $3=(NR-1)/(lin)}' new_$i >>tempfile1_$i
 	lines=`wc -l <full_$i`
-	awk -v lin="${lines}" '{if(NR==14) print ($1" "$2" "1); else  print $1" "$2" "(NR)/(lin)}' full_$i >>outfile_$i
-	awk '{a[i++]=$3} END {while(i--) print a[i]}' outfile_$i >> tempfile_$i
+	awk -v lin="${lines}" '{if(NR==14) print ($1" "$2" "1); else  print $1" "$2" "(NR)/(lin)}' full_$i >>outfile1_$i
+	awk '{a[i++]=$3} END {while(i--) print a[i]}' outfile1_$i >> tempfile_$i
 	
 	cat tempfile1_$i >> gesamt
 	cat tempfile_$i >> gesamt
 	rm tempfile_$i
 	rm tempfile1_$i
-	rm outfile_$i
+	rm outfile1_$i
 	done
 	
 	paste -d ' ' moonTemp_temp_${city}.txt gesamt >> moonTemp1_${city}.txt
 	rm gesamt
 	rm moonTemp_temp_${city}.txt
 	
-	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_highQuality_${city}.txt
+	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_${Quality}_${city}.txt
 	
 	rm moonTemp1_${city}.txt
 	
@@ -119,8 +119,8 @@ then
 		fi
 	done
 else 
-	touch ${path}/moonTemp_${city}_${Quality}.txt
-	output=${path}/moonTemp_${city}_${Quality}.txt
+	touch ${path}/moonTemp_${Quality}_${city}.txt
+	output=${path}/moonTemp_${Quality}_${city}.txt
 	Date=`awk 'NR==2 {print $1}' ${path}/moonphases_2014.txt`
 	final_date=`awk 'END {print $1}' ${path}/moonphases_2014.txt`
 	#next_date="2014-01-16"
@@ -158,7 +158,7 @@ else
 		while [[ "${following_day}" < "${test2}" ]]
 		do 
 			following_day=$(date +%Y-%m-%d -d "$Date +$count day")
-			egrep ^${following_day} ${path}/oneDayTemp_allEntries_${city}.txt>>testfile_$i.txt	
+			egrep ^${following_day} ${path}/oneDayTemp_${Quality}_${city}.txt>>testfile_$i.txt	
 			count=$((count+1))
 		done
 		#length=`wc -l <testfile_$i.txt`
@@ -234,21 +234,21 @@ else
 	lines=`wc -l <new_$i`
 	awk -v lin="${lines}" '{if(NR==1) print $3=0; else  print $3=(NR-1)/(lin)}' new_$i >>tempfile1_$i
 	lines=`wc -l <full_$i`
-	awk -v lin="${lines}" '{if(NR==14) print ($1" "$2" "1); else  print $1" "$2" "(NR)/(lin)}' full_$i >>outfile_$i
-	awk '{a[i++]=$3} END {while(i--) print a[i]}' outfile_$i >> tempfile_$i
+	awk -v lin="${lines}" '{if(NR==14) print ($1" "$2" "1); else  print $1" "$2" "(NR)/(lin)}' full_$i >>outfile2_$i
+	awk '{a[i++]=$3} END {while(i--) print a[i]}' outfile2_$i >> tempfile_$i
 	
 	cat tempfile1_$i >> gesamt
 	cat tempfile_$i >> gesamt
 	rm tempfile_$i
 	rm tempfile1_$i
-	rm outfile_$i
+	rm outfile2_$i
 	done
 	
 	paste -d ' ' moonTemp_temp_${city}.txt gesamt >> moonTemp1_${city}.txt
 	rm gesamt
 	rm moonTemp_temp_${city}.txt
 	
-	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_allEntries_${city}.txt
+	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_${Quality}_${city}.txt
 	
 	rm moonTemp1_${city}.txt
 	
