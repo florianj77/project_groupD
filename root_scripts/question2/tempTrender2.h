@@ -6,6 +6,7 @@
 class tempTrender {
 	public:
 	tempTrender(std::string filePath); //Construct using the specified file
+	//tempTrender();
 	~tempTrender() {} //Destructor
 	
 	//void tempOnDay(int monthToCalculate, int dayToCalculate); //Make a histogram of the temperature on this day
