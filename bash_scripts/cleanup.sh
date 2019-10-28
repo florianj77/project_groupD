@@ -54,7 +54,7 @@ days=$(($diff/(60*60*24)+1))
 #	rm ${path}/oneDayTemp_allEntries_${file}.txt
 #fi
 
-if (( $Quality == "allEntries" ))
+if [[ $Quality == "allEntries" ]];
 then
 	touch ${path}/oneDayTemp_allEntries_${file}.txt
 	oneDayTemp_allEntries=${path}/oneDayTemp_allEntries_${file}.txt
@@ -79,6 +79,7 @@ then
 		 
 		#echo $next_date
 		Date=${next_date}
+		#if [ $Date == ]
 	done
 	sed '/-nan/d' temporary_all > ${oneDayTemp_allEntries}
 	rm temporary_all
