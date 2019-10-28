@@ -17,7 +17,7 @@ tempTrender::tempTrender(string filePath) {
 }
 
 void tempTrender::moonTemp (){
-//make hist
+	//make hist
 	TH1I* hist = new TH1I("moon", "Temperature;Difference between relative Temperature and moon phase ;Entries", 300, 0, 100);
 	hist->SetFillColor(4);
 
@@ -44,7 +44,7 @@ void tempTrender::moonTemp (){
 	while( file2.good()){
 		//help variables
 		int year, month, day;
-		//array for the temperature
+		//array for the temperature, moon, and error
 		double_t temp[numLines];
 		double_t moon[numLines];
 		double_t err[numLines];

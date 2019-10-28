@@ -9,7 +9,7 @@ Quality=$2
 #read file
 
 path=../data_files
-
+#check that the correct file is taken
 if [ $file != "Karlstad" ]; then
 	datafile=${path}/smhi-opendata_$file.csv
 	echo "Your are working with" $datafile
@@ -18,7 +18,7 @@ else datafile=${path}/smhi-openda_$file.csv
 fi
 
 if [ ! $datafile ]; then
-	echo "Couldnt find file"
+	echo "Could not find file"
 	exit 1
 fi
 
@@ -26,6 +26,7 @@ fi
 #temporary working files
 touch temporary_file.csv
 tmpFile=temporary_file.csv
+
 #selecting only lines which start with YYYY-MM-DD followed by a semicolon
 egrep ^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\; $datafile > ${tmpFile}
 
@@ -64,6 +65,7 @@ then
 	Date=`awk -F ";" 'NR==1 {print $1}' ${tmpFile}`
 	last_date=`awk -F ";" 'END {print $1}' ${tmpFile}`
 	end_date=$(date +%Y-%m-%d -d "$last_date +$i day")
+	#while loop going through all dates
 	while [[ "${Date}" < "${end_date}" ]]
 	do 
 		touch oneDay.txt
@@ -73,28 +75,12 @@ then
 		egrep ^${next_date} ${tmpFile}>${oneDay}
 		#get the number of entries per day
 		lines=`cat $oneDay | wc -l`
-		#make a file with the date and the average of the temperature of thaht day
+		#make a file with the date and the average of the temperature of that day
 		awk -F ";" -v date="$Date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>temporary_all
 		rm ${oneDay}
 		 
 		#echo $next_date
 		Date=${next_date}
-		#echo $Date
-		#if [ $Date == "1970-01-01" ]; then
-		#	echo "Your are in the 70s!"
-		#fi
-		#if [ $Date == "1980-01-01" ]; then
-		#	echo "Your are in the 80s!"
-		#fi
-		#if [ $Date == "1990-01-01" ]; then
-		#	echo "Your are in the 90s!"
-		#fi
-		#if [ $Date == "2000-01-01" ]; then
-		#	echo "Your are in the 00s!"
-		#fi
-		#if [ $Date == "2010-01-01" ]; then
-		#	echo "Your are in the 10s!"
-		#fi
 		
 	done
 	sed '/-nan/d' temporary_all > ${oneDayTemp_allEntries}
@@ -103,9 +89,10 @@ then
 	rm ${tmpFile}
 ####making a file that contains the average temp per day using only high quality results#####
 
-#temporary working files
+
 
 else 
+	#temporary working files
 	touch tmpFile_highQuality.txt
 	tmpFile_highQuality=tmpFile_highQuality.txt
 	touch oneDay_highQuality.txt

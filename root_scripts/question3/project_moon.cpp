@@ -4,7 +4,7 @@
 	#include <iostream>
 	
 	void project() {
-		string pathToFile = "../../data_files/moonTemp_highQuality_Lund.txt"; //Put the path to data file, Southern Sweden
+		string pathToFile = "../../data_files/moonTemp_allEntries_Lund.txt"; //Put the path to data file, Southern Sweden
 		
 	
 		tempTrender t(pathToFile); //Instantiate your analysis object
