@@ -74,11 +74,14 @@ then
 		#get the number of entries per day
 		lines=`cat $oneDay | wc -l`
 		#make a file with the date and the average of the temperature of thaht day
-		awk -F ";" -v date="$Date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>${oneDayTemp_allEntries}
+		awk -F ";" -v date="$Date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>temporary_all
 		rm ${oneDay}
+		 
 		#echo $next_date
 		Date=${next_date}
 	done
+	sed '/-nan/d' temporary_all > ${oneDayTemp_allEntries}
+	rm temporary_all
 	echo "Created file" $oneDayTemp_allEntries "with average temperature results of each day, containing low and high quality results."
 	rm ${tmpFile}
 ####making a file that contains the average temp per day using only high quality results#####
@@ -128,10 +131,11 @@ else
 		#get the number of entries per day
 		lines_highQuality=`cat $oneDay_highQuality | wc -l`
 		#make a file with the date and the average of the temperature of thaht day
-		awk -F ";" -v date="$next_date_highQuality" -v line="$lines_highQuality" '{sum += $3} END {print date" "sum/line}' ${oneDay_highQuality}>>${oneDayTemp_highQuality}
+		awk -F ";" -v date="$next_date_highQuality" -v line="$lines_highQuality" '{sum += $3} END {print date" "sum/line}' ${oneDay_highQuality}>>temporary_high
 		rm ${oneDay_highQuality}
 	done
-
+	sed '/-nan/d' temporary_high > ${oneDayTemp_allEntries}
+	rm temporary_high
 	echo "Created file" $oneDayTemp_highQuality "with average temperature results of each day, containig only high quality results."
 	rm ${tmpFile_highQuality}
 fi
