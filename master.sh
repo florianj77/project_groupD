@@ -54,7 +54,7 @@ if [ ${Option} == "1" ]; then
 	
 	#cleanup/prepare data
 	
-	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]];
+	if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]];
 	then
 		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
@@ -68,18 +68,14 @@ if [ ${Option} == "1" ]; then
 	#run corresponding root script
 	
 	cd ${base}/root_scripts/question${Option}
-	root 
-	ech
+	root -b -l -q 'project();'
 	cd ${base}/pictures
 	mv newpicture.jpg ${output}
 	xdg-open ${output}
 	
-else
-	
-	exit 1
-fi
-elif (( ${Option} -eq "2" ));
-then
+
+elif [ ${Option} -eq "2" ]; then
+	echo "hi"
 
 ####Exercise 2
 
@@ -104,7 +100,7 @@ then
 	if [[ ${qualitychoice} == "y" ]];
 	then 
 		Quality="highQuality"
-	else if [[ ${qualitychoice} == "n" ]];
+	elif [[ ${qualitychoice} == "n" ]];
 	then
 		Quality="allEntries"
 	else 
@@ -116,7 +112,7 @@ then
 	
 	#cleanup/prepare data
 	
-	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
+	if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
 		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
 		./cleanup.sh ${city} ${Quality}
@@ -138,8 +134,7 @@ then
 	mv newpicture.jpg ${output}
 	xdg-open ${output} 
 
-elif (( ${Option} == "3" ));
-then 
+elif [ ${Option} == "3" ]; then 
 
 	###Exercise 3
 	city="Lund"
@@ -151,7 +146,7 @@ then
 	if [[ ${qualitychoice} == "y" ]];
 	then 
 		Quality="highQuality"
-	else if [[ ${qualitychoice} == "n" ]];
+	elif [[ ${qualitychoice} == "n" ]];
 	then
 		Quality="allEntries"
 	else 
@@ -163,7 +158,7 @@ then
 	
 	#cleanup/prepare data
 	
-	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]
+	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
 		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
 		./cleanup.sh ${city} ${Quality}
