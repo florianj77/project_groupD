@@ -23,14 +23,16 @@ tempTrender::tempTrender(string filePath) {
 void tempTrender::hotCold(){
 	
 	
-	TCanvas *c1 = new TCanvas("c1","The coldest temperature per year",60,60,500,300);
+	TCanvas *c1 = new TCanvas("c1","Extreme temperatures per year",60,60,500,300);
 	
 	TGraph* graph = new TGraph("../../data_files/coldestday_Lund.txt");
 	TGraph* graph1 = new TGraph("../../data_files/hottestday_Lund.txt");
 	TMultiGraph *mg = new TMultiGraph(); 
+	graph->SetFillColor(4);
+	graph1->SetFillColor(2);
 	mg -> Add(graph);
 	mg -> Add(graph1);
-	mg->Draw("a");
+	mg->Draw("AB");
 	c1->SaveAs("../../pictures/newpicture.jpg");
 	//graph->CreateTMultiGraph(graph, graph1);
 	
