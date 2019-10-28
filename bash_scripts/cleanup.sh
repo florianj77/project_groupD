@@ -17,7 +17,7 @@ else datafile=${path}/smhi-openda_$file.csv
 	echo "Your are working with" $datafile
 fi
 
-if [[ ! $datafile ]]; then
+if [ ! $datafile ]; then
 	echo "Couldnt find file"
 	exit 1
 fi
@@ -54,7 +54,7 @@ days=$(($diff/(60*60*24)+1))
 #	rm ${path}/oneDayTemp_allEntries_${file}.txt
 #fi
 
-if [[ Quality == "allEntries" ]];
+if (( $Quality == "allEntries" ))
 then
 	touch ${path}/oneDayTemp_allEntries_${file}.txt
 	oneDayTemp_allEntries=${path}/oneDayTemp_allEntries_${file}.txt
@@ -110,7 +110,7 @@ else
 	days_highQuality=$(($diff_highQuality/(60*60*24)+1))
 	#echo $days
 	#Make a file containing the average tmeperature of a day, Format: date averageTemperature
-	if [[ -f ${path}/oneDayTemp_highQuality_${file}.txt ]]; then
+	if [ -f ${path}/oneDayTemp_highQuality_${file}.txt ]; then
 		rm ${path}/oneDayTemp_highQuality_${file}.txt
 	fi
 	
