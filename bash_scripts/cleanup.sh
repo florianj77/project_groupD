@@ -134,7 +134,7 @@ else
 		awk -F ";" -v date="$next_date_highQuality" -v line="$lines_highQuality" '{sum += $3} END {print date" "sum/line}' ${oneDay_highQuality}>>temporary_high
 		rm ${oneDay_highQuality}
 	done
-	sed '/-nan/d' temporary_high > ${oneDayTemp_allEntries}
+	sed '/-nan/d' temporary_high > ${oneDayTemp_highQuality}
 	rm temporary_high
 	echo "Created file" $oneDayTemp_highQuality "with average temperature results of each day, containig only high quality results."
 	rm ${tmpFile_highQuality}
