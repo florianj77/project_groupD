@@ -1,7 +1,12 @@
 Workplan
 
-Plan 1: Average temperature on a given day, in a Northern and Southern city in Sweden. Compare
+Question 1: Average temperature on a given day, in a Northern and Southern city in Sweden. Compare - Florian & Marie-Anne
 
-Plan 2: Coldest day of the year in Umea (and Lund). Compare 
+Question 2: Coldest day of the year in Umea (and Lund). Compare - Jakob & Jenny
 
-Plan 3: 
+Question 3: What is the relation between the average temperature percentage per day in a moon cycle, compared to the percentage of the moon phase in Lund?
+
+
+Plan for 3: 
+1. Split year in moon cycles
+2. Highest and lowest temperature per month > convert to %
