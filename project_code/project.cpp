@@ -3,8 +3,8 @@
 #include <iostream>
 
 void project() {
-	string pathToFile = "/home/courseuser/project_groupD/project_groupD/easyToRead1200_Lund.txt"; //Put the path to your data file here
-	//cout<<"File path = "<<pathToFile<<endl;
+	string pathToFile = "/home/courseuser/Documents/project_groupD-master/project_groupD/easyToRead1200_Lund.txt"; //Put the path to your data file here
+	cout<<"File path Lund = "<<pathToFile<<endl;
 	tempTrender t(pathToFile); //Instantiate your analysis object
 	
 	t.tempOnDay(8, 23); //Call implemented function
