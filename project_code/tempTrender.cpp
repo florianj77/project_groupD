@@ -13,20 +13,20 @@
 
 tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
-	cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
 	fileToPath=filePath;
 }
 
 //make function to give hist with temp on given day for each year
 void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
+
 	cout<<"Month "<<monthToCalculate<<endl;
 	cout<<"Day "<<dayToCalculate<<endl;
 	cout<<fileToPath<<endl;
 	//make hist
-	TH1I* hist = new TH1I("temperature", "Temperature;Temperature[#circC];Entries", 300, -20, 40);
+	TH1I* hist = new TH1I("temperature", "Temperature;Temperature[#circC];Entries", 300, -35, 30);
 	hist->SetFillColor(4);
-	hist->SetTitle("Average temperature on a day");
-	
+	hist->SetTitle("Average temperature on the given day during more than 50 years");
+
 	//get city by getting substring of path variable
 	string city_long = fileToPath.substr(fileToPath.find_last_of("_")+1);
 	//cout<<city_long<<endl;
@@ -76,9 +76,17 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	double stdev = hist->GetRMS(); //The standard deviation
 	TCanvas* can = new TCanvas();
 	hist->Draw();
+	
+//save the graph as a picture called by the name of the city
 	if (city=="Lund"){
 		can->SaveAs("Lund.jpg");
 	}
-	
-	
+	if (city=="Lulea"){
+		can->SaveAs("Lulea.jpg");
+	}
+	if (city=="Karlstad"){
+		can->SaveAs("Karlstad.jpg");
+	}
+		
 }
+
