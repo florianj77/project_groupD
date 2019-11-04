@@ -4,6 +4,7 @@
 
 void project() {
 	string pathToFile = "/home/courseuser/Documents/project_groupD-master/project_groupD/easyToRead1200_Lund.txt"; //Put the path to your data file here
+	//string pathToFile = "/home/courseuser/Documents/project_groupD-master/project_groupD/easyToRead1200_Lulea.txt";
 	cout<<"File path Lund = "<<pathToFile<<endl;
 	tempTrender t(pathToFile); //Instantiate your analysis object
 	

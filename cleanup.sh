@@ -71,7 +71,7 @@ echo "Created file" $oneDayTemp_allEntries "with average temperature results of 
 #temporary working files
 touch tmpFile_highQuality.txt
 tmpFile_highQuality=tmpFile_highQuality.txt
-oneDay_highQuality.txt
+touch oneDay_highQuality.txt
 oneDay_highQuality=oneDay_highQuality.txt
 
 #Get only good quality results
