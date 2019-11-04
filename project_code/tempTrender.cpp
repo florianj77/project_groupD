@@ -24,7 +24,7 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	//make hist
 	TH1I* hist = new TH1I("temperature", "Temperature;Temperature[#circC];Entries", 300, -20, 40);
 	hist->SetFillColor(4);
-	hist->SetTitle("Average temperature in Lund on the 23/08");
+	hist->SetTitle("Average temperature in Lund on the 23/08 ");
 	//system("./preparefile.sh");
 	//open file (file path missing to be implemented correctly)
 	ifstream file("/home/courseuser/Documents/project_groupD-master/project_groupD/easyToRead1200_Lund.txt");
