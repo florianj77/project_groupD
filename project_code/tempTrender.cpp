@@ -23,10 +23,11 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	
 	//make hist
 	TH1I* hist = new TH1I("temperature", "Temperature;Temperature[#circC];Entries", 300, -20, 40);
-	hist->SetFillColor(kRed + 1);
+	hist->SetFillColor(4);
+	hist->SetTitle("Average temperature in Lund on the 23/08");
 	//system("./preparefile.sh");
 	//open file (file path missing to be implemented correctly)
-	ifstream file("/home/courseuser/project_groupD/project_groupD/easyToRead1200_Lund.txt");
+	ifstream file("/home/courseuser/Documents/project_groupD-master/project_groupD/easyToRead1200_Lund.txt");
 	
 	
 	//count number of lines to know array size
@@ -39,7 +40,7 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	file.close();
 
 	//read file to get temperature data
-	ifstream file2("/home/courseuser/project_groupD/project_groupD/easyToRead1200_Lund.txt");
+	ifstream file2("/home/courseuser/Documents/project_groupD-master/project_groupD/easyToRead1200_Lund.txt");
 	while( file2.good()){
 		//help variables
 		int year, month, day;
@@ -63,7 +64,6 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 				//make hist
 				hist->Fill(temp[nt]); 
 			}
-		//hist->Fill(3.2);//Increment the bin corresponding to -3.2 C
 		}
 	}
 	double mean = hist->GetMean(); //The mean of the distribution
