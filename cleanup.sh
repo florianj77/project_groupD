@@ -50,18 +50,22 @@ echo "low Quality entries"
 grep "G" cleaned_${file}.csv >> cleaned_${file}_highQuality.csv
 fi
  
-#date=`awk -F ";" 'NR==1{print $1}' ${tempFile}`
+#date=`awk -F ";" 'NR==1{print $1}' ${tmpFile}`
 #echo $date
 
 #Make a file containing the average tmeperature of a day, Format: date averageTemperature
-Date=1961-01-01
+Date=`awk -F ";" 'NR==1 {print $1}' ${tmpFile}`
+echo ${Date}
+last_date=`awk -F ";" 'END {print $1}' ${tmpFile}`
+echo ${last_date}
 rm oneDayTemp.txt
 touch oneDay.txt
-touch oneDayTemp.txt
+touch oneDayTemp_${file}.txt
 oneDay=oneDay.txt
-oneDayTemp=oneDayTemp.txt
+oneDayTemp=oneDayTemp_${file}.txt
 #increase starting date by one day for each i
-for i in {0..100}
+echo "Calculating the average Temperature per day, this can take a while"
+while [[ "${Date}" < "${last_date}" ]]
 do 
 	next_date=$(date +%Y-%m-%d -d "$Date +$i day")
 	#grep only the lines with the same date
@@ -70,8 +74,8 @@ do
 	lines=`cat $oneDay | wc -l`
 	#make a file with the date and the average of the temperature of thaht day
 	awk -F ";" -v date="$next_date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>${oneDayTemp}
-	rm $oneDay
-	#rm $oneDayTemp
+	rm ${oneDay}
+	Date=${next_date}
 done
  
 # store in easy readable format for c++
