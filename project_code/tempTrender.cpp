@@ -26,7 +26,13 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	TH1I* hist = new TH1I("temperature", "Temperature;Temperature[#circC];Entries", 300, -20, 40);
 	hist->SetFillColor(4);
 	hist->SetTitle("Average temperature on a day");
-
+	
+	//get city by getting substring of path variable
+	string city_long = fileToPath.substr(fileToPath.find_last_of("_")+1);
+	//cout<<city_long<<endl;
+	string city = city_long.substr(0,city_long.size()-4);
+	//cout<<city<<endl;
+	
 	//open file (file path missing to be implemented correctly)
 	ifstream file(fileToPath.c_str());
 	
@@ -70,4 +76,9 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	double stdev = hist->GetRMS(); //The standard deviation
 	TCanvas* can = new TCanvas();
 	hist->Draw();
+	if (city=="Lund"){
+		can->SaveAs("Lund.jpg");
+	}
+	
+	
 }
