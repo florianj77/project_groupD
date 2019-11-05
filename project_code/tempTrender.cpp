@@ -26,7 +26,7 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 	TH1I* hist = new TH1I("temperature", "Temperature;Temperature[#circC];Entries", 300, -20, 40);
 	hist->SetFillColor(4);
 	hist->SetTitle("Average temperature on a day");
-	
+
 	//open file (file path missing to be implemented correctly)
 	ifstream file(fileToPath.c_str());
 	
@@ -64,7 +64,6 @@ void tempTrender::tempOnDay (int monthToCalculate, int dayToCalculate){
 				//make hist
 				hist->Fill(temp[nt]); 
 			}
-		//hist->Fill(3.2);//Increment the bin corresponding to -3.2 C
 		}
 	}
 	double mean = hist->GetMean(); //The mean of the distribution
