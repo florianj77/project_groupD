@@ -41,8 +41,8 @@ days=$(($diff/(60*60*24)+1))
 #echo $days
 
 # temporary working files
-touch oneDay.txt
-oneDay=oneDay.txt
+#touch oneDay.txt
+#oneDay=oneDay.txt
 #Make a file containing the average tmeperature of a day, Format: date averageTemperature
 if [[ -f oneDayTemp_allEntries_${file}.txt ]]; then
 	rm oneDayTemp_allEntries_${file}.txt
@@ -58,6 +58,8 @@ last_date=`awk -F ";" 'END {print $1}' ${tmpFile}`
 end_date=$(date +%Y-%m-%d -d "$last_date +$i day")
 while [[ "${Date}" < "${end_date}" ]]
 do 
+	touch oneDay.txt
+	oneDay=oneDay.txt
 	next_date=$(date +%Y-%m-%d -d "$Date +$i day")
 	#grep only the lines with the same date
 	egrep ^${next_date} ${tmpFile}>${oneDay}
@@ -66,6 +68,7 @@ do
 	#make a file with the date and the average of the temperature of thaht day
 	awk -F ";" -v date="$Date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>${oneDayTemp_allEntries}
 	rm ${oneDay}
+	#echo $next_date
 	Date=${next_date}
 done
 echo "Created file" $oneDayTemp_allEntries "with average temperature results of each day, containing low and high quality results."
