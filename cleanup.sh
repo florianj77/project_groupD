@@ -53,16 +53,20 @@ oneDayTemp_allEntries=oneDayTemp_allEntries_${file}.txt
 echo "generating file, this can take a few minutes..."
 
 #increase starting date by one day for each i
-for i in $(seq 0 $days)
+Date=`awk -F ";" 'NR==1 {print $1}' ${tmpFile}`
+last_date=`awk -F ";" 'END {print $1}' ${tmpFile}`
+end_date=$(date +%Y-%m-%d -d "$last_date +$i day")
+while [[ "${Date}" < "${end_date}" ]]
 do 
-	next_date=$(date +%Y-%m-%d -d "$earliestDate +$i day")
+	next_date=$(date +%Y-%m-%d -d "$Date +$i day")
 	#grep only the lines with the same date
 	egrep ^${next_date} ${tmpFile}>${oneDay}
 	#get the number of entries per day
 	lines=`cat $oneDay | wc -l`
 	#make a file with the date and the average of the temperature of thaht day
-	awk -F ";" -v date="$next_date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>${oneDayTemp_allEntries}
+	awk -F ";" -v date="$Date" -v line="$lines" '{sum += $3} END {print date" "sum/line}' ${oneDay}>>${oneDayTemp_allEntries}
 	rm ${oneDay}
+	Date=${next_date}
 done
 echo "Created file" $oneDayTemp_allEntries "with average temperature results of each day, containing low and high quality results."
 
