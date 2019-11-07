@@ -1,15 +1,26 @@
 Workplan
 
-Question 1: Average temperature on a given day, in a Northern (Lulea) and Southern city (Lund) in Sweden. Compare - Florian & Marie-Anne
+For Q1 and Q2 we will compare the temperatures over the whole data given (e. g around 50-70 years)
+
+Question 1: Average temperature on a given day, in a Northern (Lulea), a central city (Karlstad) and Southern city (Lund) in Sweden. Compare - Florian & Marie-Anne
+  To reach the goal we did:
+    .) created a bash script (cleanup.sh) to structure our data (make average on that day each year, get rid of "noise" in the file) in order to be easily read by root
+    .) implemented a root function (tempOnDay) to make a graph of a given city on a given day.
+
 
 Question 2: Coldest day of the year in Umea (and Lund). Compare - Jakob & Jenny
+  To reach the goal we did:
+    .) used cleanup.sh file
+    .) created a bash script (coldestday.sh) to get the coldest day of each year
+    .) implement root function -> work in progress
 
-Question 3: What is the relation between the average temperature percentage per day in a moon cycle, compared to the percentage of the moon phase in Lund?
 
+Question 3: What is the relation between the average temperature in percentage per day in a moon cycle, compared to the percentage of the moon phase in Lund in 2014?
 Plan for 3: 
 1. Split year in moon cycles
 2. Highest and lowest temperature per month > convert to %
 Try to find a connection between the moon cycle and temperature peaks
-
-We have written a bash script to clean the data files to obtain only the needed informations in new files (one per city).
-We have divided the first 2 questions to work in 2 teams. Thanks to that results we will be able to start the question 3 all together.
+  To reach the goal we did:
+    .) create a bash script (moonTemp.sh) which mkaes a file containing the date, temperature in percent and the moon cycle status (percent)
+        -> work in progress
+    .) implement root function -> work in progress
