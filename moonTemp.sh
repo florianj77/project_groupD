@@ -61,3 +61,5 @@ do
 	#awk -v start="${Date}" -v stop="${next_date}" 
 	#awk 'NR == 1 {print $0" "$0}' moonphases_2014.txt >> moonTemp_${city}.txt
 done
+
+
