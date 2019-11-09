@@ -40,7 +40,7 @@ void tempTrender::hotCold(){
 	mg -> Add(graph1);
 	mg->Draw("AB");
 	mg->GetXaxis()->SetTitle("Years");
-	mg->GetYaxis()->SetTitle("degrees Celsius");
+	mg->GetYaxis()->SetTitle("Temperature [#circC]");
 	c1->BuildLegend();
 	c1->SaveAs("../../pictures/newpicture.jpg");
 	
