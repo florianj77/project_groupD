@@ -15,7 +15,6 @@
 //using namespace std;
 tempTrender::tempTrender(string filePath) {
 	//cout << "The user supplied " << filePath << " as the path to the data file." << endl;
-	//cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
 	fileToPath=filePath;
 }
 
@@ -23,24 +22,26 @@ tempTrender::tempTrender(string filePath) {
 void tempTrender::hotCold(){
 	
 	
-	TCanvas *c1 = new TCanvas("c1","Extreme temperatures per year",60,60,500,300);
+	TCanvas *c1 = new TCanvas("c1","Extreme temperatures per year");
 	
-	TGraph* graph = new TGraph("../../data_files/coldestday_Lund.txt");
-	TGraph* graph1 = new TGraph("../../data_files/hottestday_Lund.txt");
+	//TGraph* graph = new TGraph("../../data_files/coldestday_Lund.txt");
+	//TGraph* graph1 = new TGraph("../../data_files/hottestday_Lund.txt");
+	TGraph* graph = new TGraph("../../data_files/coldestday_Karlstad.txt");
+	TGraph* graph1 = new TGraph("../../data_files/hottestday_Karlstad.txt");
 	TMultiGraph *mg = new TMultiGraph(); 
-	graph->SetFillColor(4);
-	graph1->SetFillColor(2);
+	
+	graph->SetFillColor(4); //blue
+	graph->SetTitle("Coldest days");
+	
+	graph1->SetFillColor(2); //red
+	graph1->SetTitle("Hottest days");
+
 	mg -> Add(graph);
 	mg -> Add(graph1);
 	mg->Draw("AB");
+	mg->GetXaxis()->SetTitle("Years");
+	mg->GetYaxis()->SetTitle("degrees Celsius");
+	c1->BuildLegend();
 	c1->SaveAs("../../pictures/newpicture.jpg");
-	//graph->CreateTMultiGraph(graph, graph1);
-	
-	//graph->Draw(graph);
-	//graph1->Draw("same");
-	
-	//double mean = hist->GetMean(); //The mean of the distribution
-	//double stdev = hist->GetRMS(); //The standard deviation
-	//TCanvas* can = new TCanvas();
 	
 }
