@@ -140,7 +140,7 @@ awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.tx
 #
 rm moonTemp1_${city}.txt
 
-for i in {0..11}
+for i in $(seq 0 $range)
 do
 	if [[ -f new_${i} ]]; then
 		rm new_${i}
