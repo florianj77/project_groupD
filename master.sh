@@ -175,7 +175,6 @@ elif [ ${Option} -eq "2" ]; then
 	#include \"tempTrender2.h\"
 	
 	//ROOT library objects
-
 	#include <TH1.h>
 	#include <TGraph.h>
 	#include <TCanvas.h>
@@ -192,7 +191,8 @@ elif [ ${Option} -eq "2" ]; then
 		
 		TCanvas *c1 = new TCanvas(\"c1\",\"Extreme temperatures per year\");
 		
-
+		//TGraph* graph = new TGraph(\"../../data_files/coldestday_Lund.txt\");
+		//TGraph* graph1 = new TGraph(\"../../data_files/hottestday_Lund.txt\");
 		TGraph* graph = new TGraph(\"../../data_files/coldestday_${Quality}_${city}.txt\");
 		TGraph* graph1 = new TGraph(\"../../data_files/hottestday_${Quality}_${city}.txt\");
 		TMultiGraph *mg = new TMultiGraph(); 
