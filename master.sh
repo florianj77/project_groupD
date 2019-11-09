@@ -68,7 +68,26 @@ if [ ${Option} == "1" ]; then
 	#run corresponding root script
 	
 	cd ${base}/root_scripts/question${Option}
-	root -b -l -q 'project();'
+	echo "
+	#include \"tempTrender.h\"
+	#include <string>
+	#include <iostream>
+	
+	void project() {
+		string pathToFile = \"../../data_files/oneDayTemp_${Quality}_${city}.txt\"; //Put the path to data file, Southern Sweden
+	
+	
+		tempTrender t(pathToFile); //Instantiate your analysis object
+		
+		t.tempOnDay(12, 24); //Call implemented function
+		//t.tempOnDay(235);
+		//t.tempPerDay();
+		//t.hotCold();
+		//t.tempPerYear(2050);
+		
+	}" > project.cpp
+	root
+	#root -b -l -q 'project();'
 	cd ${base}/pictures
 	mv newpicture.jpg ${output}
 	xdg-open ${output}
@@ -127,7 +146,64 @@ elif [ ${Option} -eq "2" ]; then
 	#run corresponding root script
 	
 	cd ${base}/root_scripts/root_q${Option}
-	#root
+	echo"
+	#include \"tempTrender2.h\"
+	#include <string>
+	#include <iostream>
+	
+	void project() {
+		//string pathToFile1 = \"../../data_files/coldestday_${Quality}_${city}.txt\"; //Put the path to data file, Southern Sweden
+		string pathToFile2 = \"../../data_files/coldestday_${Quality}_${city}.txt\";
+	
+		tempTrender t(pathToFile); //Instantiate your analysis object
+		
+		//t.tempOnDay(12, 24); //Call implemented function
+		//t.tempOnDay(235);
+		//t.tempPerDay();
+		t.hotCold();
+		//t.tempPerYear(2050);
+	}" > project2.cpp
+	
+	echo"
+	//ROOT library objects
+	#include <TH1.h>
+	#include <TGraph.h>
+	#include <TCanvas.h>
+	#include <TMultiGraph.h>
+	//using namespace std;
+	tempTrender::tempTrender(string filePath) {
+		//cout << \"The user supplied \" << filePath << \" as the path to the data file.\" << endl;
+		fileToPath=filePath;
+	}
+	
+	//make function to give hist with temp for each year
+	void tempTrender::hotCold(){
+		
+		
+		TCanvas *c1 = new TCanvas(\"c1\",\"Extreme temperatures per year\");
+		
+
+		TGraph* graph = new TGraph(\"../../data_files/coldestday_${Quality}_${city}.txt\");
+		TGraph* graph1 = new TGraph(\"../../data_files/hottestday_${Quality}_${city}.txt\");
+		TMultiGraph *mg = new TMultiGraph(); 
+		
+		graph->SetFillColor(4); //blue
+		graph->SetTitle(\"Coldest days\");
+		
+		graph1->SetFillColor(2); //red
+		graph1->SetTitle(\"Hottest days\");
+	
+		mg -> Add(graph);
+		mg -> Add(graph1);
+		mg->Draw(\"AB\");
+		mg->GetXaxis()->SetTitle(\"Years\");
+		mg->GetYaxis()->SetTitle(\"Temperature [#circC]\");
+		c1->BuildLegend();
+		c1->SaveAs(\"../../pictures/newpicture.jpg\");
+		
+	}" > tempTrender2.cpp
+	
+	root
 	#project()
 	#.q
 	cd ${base}/pictures
@@ -171,7 +247,23 @@ elif [ ${Option} == "3" ]; then
 	
 	moonTemp_final ${city} ${Quality}
 	cd ${base}/root_scripts/root_q${Option}
-	#root
+	echo"
+	#include \"tempTrender_moon.h\"
+	#include <string>
+	#include <iostream>
+	
+	void project() {
+		string pathToFile = \"../../data_files/moonTemp_${Quality}_${city}.txt\"; //Put the path to data file, Southern Sweden
+		
+	
+		tempTrender t(pathToFile); //Instantiate your analysis object
+		
+		//t.tempOnDay(12, 24); //Call implemented function
+		t.moonTemp();
+		
+	}" > project_moon.cpp
+
+	root
 	#project()
 	#.q
 	mv newpicture.jpg ${output}
