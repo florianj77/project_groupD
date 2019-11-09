@@ -8,8 +8,9 @@
 #include "tempTrender.h"
 
 //ROOT library objects
-#include "TH1.h"
-#include "TCanvas.h"
+#include <TH1.h>
+#include <TGraph.h>
+#include <TCanvas.h>
 //using namespace std;
 tempTrender::tempTrender(string filePath) {
 	//cout << "The user supplied " << filePath << " as the path to the data file." << endl;
@@ -21,9 +22,17 @@ tempTrender::tempTrender(string filePath) {
 void tempTrender::hotCold(){
 	
 	//make hist
-	TH1I* hist = new TH1I("temperature", "Year;Year;Temperature[#circC]", 300, -20, 40);
-	hist->SetFillColor(4);
-	hist->SetTitle("Temperature per year");
+	//TH1I* hist = new TH1I("temperature", "Year;Year;Temperature[#circC]", 300, 1950, 2020);
+	//hist->SetFillColor(4);
+	//hist->SetTitle("Temperature per year");
+	
+	//TCanvas *c1 = new TCanvas("c1","The coldest temperature per year",60,60,500,300);
+	//TGraph* graph = new TGraph();
+	
+	
+	
+	
+	
 
 	//open file (file path missing to be implemented correctly)
 	ifstream file(fileToPath.c_str());
@@ -39,35 +48,33 @@ void tempTrender::hotCold(){
 
 	//read file to get temperature data
 	ifstream file2(fileToPath.c_str());
-	while( file2.good()){
+	while(file2.good()){
 		//help variables
-		int year;
-		double temperature;
-		int a[70], int b[70];
-		while (!infile.
+		double_t year[numLines];
 		
 		
-		
-		
-		
-		
-		
-		int year;
 		//array for the temperature
 		double_t temp[numLines];
 		//loop over the number of lines
 		for(Int_t nt = 0; nt<numLines; nt++ ){
-		file2>>year>>temp[numLines];
-		cout<<year<<""<<temp[numLines]<<endl;
+		file2>>year[numLines]>>temp[numLines];
+		cout<<year[numLines]<<" "<<temp[numLines]<<endl;
 		
-	
 				//make hist
-				hist->Fill(temp[nt]); 
+				//graph->Fill(year[numLines]); 
+				//year[numLines];
 			}
+			
+			TCanvas *c1 = new TCanvas("c1","The coldest temperature per year",60,60,500,300);
+			TGraph* graph = new TGraph(numLines, year, temp);
+			graph->SetFillColor(40);
+	graph->GetXaxis()->SetTitle("Years");
+	graph->GetYaxis()->SetTitle("Temperature");
+	graph->Draw("AB");
 		}
 	
-	double mean = hist->GetMean(); //The mean of the distribution
-	double stdev = hist->GetRMS(); //The standard deviation
-	TCanvas* can = new TCanvas();
-	hist->Draw();
+	//double mean = hist->GetMean(); //The mean of the distribution
+	//double stdev = hist->GetRMS(); //The standard deviation
+	//TCanvas* can = new TCanvas();
+	
 }
