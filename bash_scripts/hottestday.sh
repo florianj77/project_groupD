@@ -1,12 +1,12 @@
 #!/bin/bash
 
-city=$@
+city=$1
+Quality=$2
 
 path=../data_files
 
-echo "Do you want to include only high quality results? [y/n]"
-read choice
-if [[ ${choice} == "y" ]]; then
+
+if [[ ${Quality} == "highQuality" ]]; then
 	if [[ -f ${path}/coldestday_HQ_$city.txt ]]; then
 		rm ${path}/coldestday_HQ_$city.txt
 	fi
