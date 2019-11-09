@@ -145,15 +145,15 @@ elif [ ${Option} -eq "2" ]; then
 	cd ${base}
 	#run corresponding root script
 	
-	cd ${base}/root_scripts/root_q${Option}
-	echo"
+	cd ${base}/root_scripts/question${Option}
+	echo "
 	#include \"tempTrender2.h\"
 	#include <string>
 	#include <iostream>
 	
 	void project() {
-		//string pathToFile1 = \"../../data_files/coldestday_${Quality}_${city}.txt\"; //Put the path to data file, Southern Sweden
-		string pathToFile2 = \"../../data_files/coldestday_${Quality}_${city}.txt\";
+		string pathToFile = \"../../data_files/coldestday_${Quality}_${city}.txt\"; //Put the path to data file, Southern Sweden
+		//string pathToFile = \"../../data_files/coldestday_${Quality}_${city}.txt\";
 	
 		tempTrender t(pathToFile); //Instantiate your analysis object
 		
@@ -164,8 +164,18 @@ elif [ ${Option} -eq "2" ]; then
 		//t.tempPerYear(2050);
 	}" > project2.cpp
 	
-	echo"
+	echo "
+	//include C++ STL headers
+	#include <iostream>
+	#include <fstream>
+	
+	#include \"TMath.h\"
+	
+	//own files
+	#include \"tempTrender2.h\"
+	
 	//ROOT library objects
+
 	#include <TH1.h>
 	#include <TGraph.h>
 	#include <TCanvas.h>
@@ -234,7 +244,7 @@ elif [ ${Option} == "3" ]; then
 	
 	#cleanup/prepare data
 	
-	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
+	if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
 		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
 		./cleanup.sh ${city} ${Quality}
@@ -246,8 +256,8 @@ elif [ ${Option} == "3" ]; then
 	#run corresponding root script
 	
 	moonTemp_final ${city} ${Quality}
-	cd ${base}/root_scripts/root_q${Option}
-	echo"
+	cd ${base}/root_scripts/question${Option}
+	echo "
 	#include \"tempTrender_moon.h\"
 	#include <string>
 	#include <iostream>
