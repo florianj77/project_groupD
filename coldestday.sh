@@ -19,7 +19,7 @@ if [[ ${choice} == "y" ]]; then
 	do
 		next_date=$(date +%Y-%m-%d -d "$Date +$i year")
 		stop_date=$(date +%Y-%m-%d -d "$next_date -1 day")
-		awk -v start="${Date}" -v stop="${stop_date}" 'BEGIN{a=100; b=substr($1,1,4)} $1 == start,$1 == stop {if ($2<a) {a=$2; b=substr($1,1,4)} fi} END{print b" "a}' oneDayTemp_highQuality_$city.txt >> coldestday_HQ_$city.txt
+		awk -v start="${Date}" -v stop="${stop_date}" 'BEGIN{a=100; b=$1} $1 == start,$1 == stop {if ($2<a) {a=$2; b=$1} fi} END{print b" "a}' oneDayTemp_highQuality_$city.txt >> coldestday_HQ_$city.txt
 		Date=${next_date}
 	done
 else
@@ -37,7 +37,7 @@ else
 	do
 		next_date=$(date +%Y-%m-%d -d "$Date +$i year")
 		stop_date=$(date +%Y-%m-%d -d "$next_date -1 day")
-		awk -v start="${Date}" -v stop="${stop_date}" 'BEGIN{a=100; b=substr($1,1,4)} $1 == start,$1 == stop {if ($2<a) {a=$2; b=substr($1,1,4)} fi} END{print b" "a}' oneDayTemp_allEntries_$city.txt >> coldestday_$city.txt
+		awk -v start="${Date}" -v stop="${stop_date}" 'BEGIN{a=100; b=$1} $1 == start,$1 == stop {if ($2<a) {a=$2; b=$1} fi} END{print b" "a}' oneDayTemp_allEntries_$city.txt >> coldestday_$city.txt
 		Date=${next_date}
 	done	
 fi
