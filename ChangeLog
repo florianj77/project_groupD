@@ -1,0 +1,27 @@
+(Details on the questions can be found in the Workplan)
+
+Thursday, 31.10.2019
+  Meeting to make the Workplan, decide which questions we want to work on and how this goals can be reached.
+  
+ Friday, 1.11.2019
+  Added the first draft of the cleanup.sh file, to process the data
+  
+Sunday, 3.11.2019/Monday, 4.11.2019
+  Added implentation of the root function tempOnDay to do histogram for question 1
+  
+Tuesday, 5.11.2019
+  Follow-up meeting
+  Added coldestday.sh file, to process the data for for question two
+  Discussed in more detail how to manage Question 3
+ 
+Thursday, 6.11.2019
+  put our github url on Canvas
+  
+Friday, 8.11.2019
+  Added moonTemp.sh file to process data for thrid question
+  Implemented root function for thrid question
+  
+Saturday, 9.11.
+  Added hottestday.sh file for additional data for second question
+  Implemented root function for second question
+  Added master.sh file
