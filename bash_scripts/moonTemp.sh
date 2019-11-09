@@ -84,41 +84,7 @@ then
 		Date=${new_moon}
 		
 	done
-	#Date=`awk 'NR==2 {print $1}' moonphases_2014.txt`
-	#echo $Date
-	#for i in $(seq 0 $range)
-	#do
-	#	next_date=`awk -v pattern="${Date}" '$0 ~ pattern {getline; print}' moonphases_2014.txt`
-	#	moon=0
-	#	j=0
-	#	next_tag=$(date +%Y-%m-%d -d "$Date +$j day")
-	#	while [[ "${next_tag}" < "${next_date}" ]]
-	#	do
-	#
-	#		awk -v mond="${moon}" -v day="${next_tag}" '$0 ~ day {print $1" "$2" "((mond+(100/15)))}' moonTemp_temp_${city}.txt>>moonTemp_${city}.txt
-	#		moon=`awk 'END{print $NF}' moonTemp_${city}.txt` 
-	#		j=$((j+1))
-	#		next_tag=$(date +%Y-%m-%d -d "$Date +$j day")
-	#		
-	#	done
-	#	Date=${next_date}
-	#	next_date=`awk -v pattern="${Date}" '$0 ~ pattern {getline; print}' moonphases_2014.txt`
-	#	one_cycle=$(date +%Y-%m-%d -d "$next_date -1 day")
-	#	moon2=100
-	#	k=0
-	#	next_tag=$(date +%Y-%m-%d -d "$Date +$k day")
-	#	while [[ "${next_tag}" < "${one_cycle}" ]]
-	#	do
-	#		next_tag=$(date +%Y-%m-%d -d "$Date +$k day")
-	#		awk -v mond="${moon2}" -v day="${next_tag}" '$0 ~ day {print $1" "$2" "((mond-(100/15)))}' moonTemp_temp_${city}.txt>>moonTemp_${city}.txt
-	#		moon2=`awk 'END{print $NF}' moonTemp_${city}.txt` 
-	#		k=$((k+1))
-	#
-	#	done
-	#	Date=${next_date}
-	#done
-	#rm moonTemp_temp_${city}.txt
-	
+
 	
 	for i in $(seq 0 $range)
 	do
@@ -139,7 +105,7 @@ then
 	rm gesamt
 	rm moonTemp_temp_${city}.txt
 	
-	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_${city}.txt
+	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_highQuality_${city}.txt
 	
 	rm moonTemp1_${city}.txt
 	
@@ -282,7 +248,7 @@ else
 	rm gesamt
 	rm moonTemp_temp_${city}.txt
 	
-	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_${city}.txt
+	awk 'a=(sqrt(($2-$3)*($2-$3))*100) {$4=sprintf("%.0f",a)}1' moonTemp1_${city}.txt >> ${path}/moonTemp_allEntries_${city}.txt
 	
 	rm moonTemp1_${city}.txt
 	
