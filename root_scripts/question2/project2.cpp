@@ -3,10 +3,8 @@
 #include <iostream>
 
 void project() {
-	string pathToFile = "../../data_files/coldestday_Lund.txt"; //Put the path to data file, Southern Sweden
-	//string pathToFile = "/home/courseuser/project_groupD-master/oneDayTemp_allEntries_Lulea.txt"; //Northern Sweden
-	//string pathToFile = "/home/courseuser/project_groupD-master/oneDayTemp_allEntries_Karlstad.txt"; //Center of Sweden
-	//cout<<"File path = "<<pathToFile<<endl;
+	//string pathToFile = "../../data_files/coldestday_Lund.txt"; //Put the path to data file, Southern Sweden
+	string pathToFile = "../../data_files/coldestday_Karlstad.txt";
 
 	tempTrender t(pathToFile); //Instantiate your analysis object
 	
