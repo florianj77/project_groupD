@@ -9,7 +9,9 @@ EX1: Average Temperature for a given day from 1961-2014 [1]
 
 EX2: Hottest and coldest Temperature from 1961-2014 [2]
 
-EX2: Compare the Weather with the moon cycle in Lund from 1961-2014 [3]"
+EX2: Compare the Weather with the moon cycle in Lund from 1961-2014 [3]
+
+Exit: Exit the program [4]"
 
 
 read Option
