@@ -39,5 +39,6 @@ else
 		stop_date=$(date +%Y-%m-%d -d "$next_date -1 day")
 		awk -v start="${Date}" -v stop="${stop_date}" 'BEGIN{a=100; b=substr($1,1,4)} $1 == start,$1 == stop {if ($2<a) {a=$2; substr($1,1,4)} fi} END{print b" "a}' oneDayTemp_allEntries_$city.txt >> coldestday_$city.txt
 		Date=${next_date}
-	done	
+	done
+	perl -i -n -e "print if /S/" main.txt	
 fi
