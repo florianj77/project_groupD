@@ -8,11 +8,11 @@ Question 1: Average temperature on a given day, in a Northern (Lulea), a central
     .) implemented a root function (tempOnDay) to make a graph of a given city on a given day.
 
 
-Question 2: Coldest and hottest day of the year in Umea (and Lund). Compare
+Question 2: Coldest and hottest day of the year in Karlstad (and Lund). Compare
   To reach the goal we did:
     .) used cleanup.sh file
     .) created a bash script (coldestday.sh) to get the coldest day of each year
-    .) implement root function hotCold
+    .) implement root function hotCold and create a multigraph to show the hottest and coldest temperatures in each city
 
 
 Question 3: What is the relation between the average temperature in percentage per day in a moon cycle, compared to the percentage of the moon phase in Lund in 2014?
