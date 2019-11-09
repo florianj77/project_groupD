@@ -18,9 +18,8 @@ tempTrender::tempTrender(string filePath) {
 
 void tempTrender::moonTemp (){
 //make hist
-	TH1I* hist = new TH1I("moon", "Temperature;Percent[#circC];Entries", 300, 0, 100);
+	TH1I* hist = new TH1I("moon", "Temperature;Difference between relative Temperature and moon phase ;Entries", 300, 0, 100);
 	hist->SetFillColor(4);
-	hist->SetTitle("Average temperature on the given day during more than 50 years");
 
 	//get city by getting substring of path variable
 	string city_long = fileToPath.substr(fileToPath.find_last_of("_")+1);
@@ -52,6 +51,7 @@ void tempTrender::moonTemp (){
 		//loop over the number of lines
 		for(Int_t nt = 0; nt<(numLines); nt++ ){
 		file2>>year>>month>>day>>temp[numLines]>>moon[numLines]>>err[numLines];
+		if( iFile.eof() ) break;	//otherwise it reads last line twice
 		//cout<<year<<" "<<month<<" "<<day<<" "<<temp[numLines]<<" "<<moon[numLines]<<" "<<err[numLines]<<endl;
 		
 		int month_abs, day_abs;
