@@ -54,7 +54,7 @@ if [ ${Option} == "1" ]; then
 	
 	#cleanup/prepare data
 	
-	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]];
+	if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]];
 	then
 		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
@@ -74,14 +74,15 @@ if [ ${Option} == "1" ]; then
 	mv newpicture.jpg ${output}
 	xdg-open ${output}
 	
-else
-	
-	exit 1
-fi
-elif (( ${Option} -eq "2" ));
-then
 
-####Exercise 2
+	
+
+
+else 
+	if [ ${Option} -eq "2" ]; ####Exercise 2
+	then
+
+
 
 	#decide which city
 	echo "For what city should this exercise be done?(Please enter just the city name: [City])
@@ -116,7 +117,7 @@ then
 	
 	#cleanup/prepare data
 	
-	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
+	if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
 		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
 		./cleanup.sh ${city} ${Quality}
@@ -131,57 +132,60 @@ then
 	#run corresponding root script
 	
 	cd ${base}/root_scripts/root_q${Option}
-	#root
+	root
 	#project()
 	#.q
 	cd ${base}/pictures
 	mv newpicture.jpg ${output}
 	xdg-open ${output} 
-
-elif (( ${Option} == "3" ));
-then 
-
-	###Exercise 3
-	city="Lund"
-	
-	#decide Quality
-	
-	echo "Do you want to only include high Quality data?[y/n]"
-	read qualitychoice
-	if [[ ${qualitychoice} == "y" ]];
-	then 
-		Quality="highQuality"
-	else if [[ ${qualitychoice} == "n" ]];
-	then
-		Quality="allEntries"
-	else 
-		echo "Invalid Input"
-		exit 1
-	fi
-	
-	output=Q${1}_${city}_${Quality}.jpg
-	
-	#cleanup/prepare data
-	
-	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]
-		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
-		cd ${base}/bash_scripts
-		./cleanup.sh ${city} ${Quality}
-		cd ${base}
-	else
-		echo "Data file exist already"
-	fi
-	
-	#run corresponding root script
-	
-	moonTemp_final ${city} ${Quality}
-	cd ${base}/root_scripts/root_q${Option}
-	#root
-	#project()
-	#.q
-	mv newpicture.jpg ${output}
-	xdg-open ${output} 
-else 
-	echo "Invalid Option"
+else
 	exit 1
 fi
+
+#else if (( ${Option} == "3" )); ###Exercise 3
+#then 
+
+	
+	#city="Lund"
+
+	##decide Quality
+	
+	#echo "Do you want to only include high Quality data?[y/n]"
+	#read qualitychoice
+	#if [[ ${qualitychoice} == "y" ]];
+	#then 
+		#Quality="highQuality"
+	#else if [[ ${qualitychoice} == "n" ]];
+	#then
+		#Quality="allEntries"
+	#else 
+		#echo "Invalid Input"
+		#exit 1
+	#fi
+	
+	#output=Q${1}_${city}_${Quality}.jpg
+	
+	##cleanup/prepare data
+	
+	#if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]
+		#echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
+		#cd ${base}/bash_scripts
+		#./cleanup.sh ${city} ${Quality}
+		#cd ${base}
+	#else
+		#echo "Data file exist already"
+	#fi
+	
+	##run corresponding root script
+	
+	#moonTemp_final ${city} ${Quality}
+	#cd ${base}/root_scripts/root_q${Option}
+	##root
+	##project()
+	##.q
+	#mv newpicture.jpg ${output}
+	#xdg-open ${output} 
+#else 
+#	echo "Invalid Option"
+#	exit 1
+#fi
