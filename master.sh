@@ -52,11 +52,13 @@ if [ ${Option} == "1" ]; then
 	
 	#cleanup/prepare data
 	
-	if [[ -f data_files/oneDayTemp_${Quality}_${city}.txt ]];
+	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]];
 	then
 		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
-		sh ${base}/bash_scripts/cleanup.sh ${city} ${Quality}
-
+		cd ${base}/bash_scripts
+		./cleanup.sh ${city} ${Quality}
+		cd ${base}
+	
 	else
 		echo "Data file exist already"
 	fi
@@ -74,107 +76,110 @@ else
 	
 	exit 1
 fi
-#elif [[ ${Option} == 2 ]]; then
+elif (( ${Option} -eq "2" ));
+then
 
-#####Exercise 2
+####Exercise 2
 
+	#decide which city
+	echo "For what city should this exercise be done?(Please enter just the city name: [City])
+	OPTIONS:
+	Boras Falsterbo Falun Lulea Lund Karlstad Soderarm Umea Visby\n"
+	read city
+	
+	if [[ ${city} != "Lund" && ${city} != "Boras" && ${city} != "Falsterbo" && ${city} != "Falun" && ${city} != "Lulea"
+		&& ${city} != "Karlstad" && ${city} != "Soderarm"	&& ${city} != "Umea" && ${city} != "Visby" ]];
+	then
+		echo "Invalid input"
+		exit 1
+	fi
+	echo "Continuing with ${city}"
+	
+	#decide Quality
+	
+	echo "Do you want to only include high Quality data?[y/n]"
+	read qualitychoice
+	if [[ ${qualitychoice} == "y" ]];
+	then 
+		Quality="highQuality"
+	else if [[ ${qualitychoice} == "n" ]];
+	then
+		Quality="allEntries"
+	else 
+		echo "Invalid Input"
+		exit 1
+	fi
 
-	##decide which city
-	#echo "For what city should this exercise be done?(Please enter just the city name: [City])
-	#OPTIONS:
-	#Boras Falsterbo Falun Lulea Lund Karlstad Soderarm Umea Visby\n"
-	#read city
+	output=Q${1}_${city}_${Quality}.jpg
 	
-	#if [[ {city} != "Lund" && {city} != "Boras" && {city} != "Falsterbo" && {city} != "Falun" && {city} != "Lulea"
-		#&& {city} != "Karlstad" && {city} != "Soderarm"	&& {city} != "Umea" && {city} != "Visby" ]];
-	#then
-		#echo "Invalid input"
-		#exit 1
-	#fi
-	#echo "Continuing with ${city}"
+	#cleanup/prepare data
 	
-	##decide Quality
+	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
+		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
+		cd ${base}/bash_scripts
+		./cleanup.sh ${city} ${Quality}
+		cd ${base}
+	else
+		echo "Data file exist already"
+	fi
+	cd ${base}/bash_scripts
+	./coldestday.sh ${city} ${Quality}
+	./hottestday.sh ${city} ${Quality}
+	cd ${base}
+	#run corresponding root script
 	
-	#echo "Do you want to only include high Quality data?[y/n]"
-	#read qualitychoice
-	#if [[ ${qualitychoice} == "y" ]];
-	#then 
-		#Quality="highQuality"
-	#else if [[ ${qualitychoice} == "n" ]];
-	#then
-		#Quality="allEntries"
-	#else 
-		#echo "Invalid Input"
-		#exit 1
-	#fi
-
-	#output=Q${1}_${city}_${Quality}.jpg
-	
-	##cleanup/prepare data
-	
-	#if [[ -f data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
-		#echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
-		#cd ${base}/bash_scripts
-		#cleanup.sh ${city} ${Quality}
-	#else
-		#echo "Data file exist already"
-	#fi
-	#coldestday.sh ${city} ${Quality}
-	#hottestday.sh ${city} ${Quality}
-	
-	##run corresponding root script
-	
-	#cd ${base}/root_scripts/root_q${Option}
-	##root
-	##project()
-	##.q
-	#cd ${base}/pictures
-	#mv newpicture.jpg ${output}
-	#xdg-open ${output} 
-
-#elif [[ ${Option} == 3 ]]; then 
-
-	####Exercise 3
-
-	#city="Lund"
-	
-	##decide Quality
-	
-	#echo "Do you want to only include high Quality data?[y/n]"
-	#read qualitychoice
-	#if [[ ${qualitychoice} == "y" ]];
-	#then 
-		#Quality="highQuality"
-	#else if [[ ${qualitychoice} == "n" ]];
-	#then
-		#Quality="allEntries"
-	#else 
-		#echo "Invalid Input"
-		#exit 1
-	#fi
-	
-	#output=Q${1}_${city}_${Quality}.jpg
-	
-	##cleanup/prepare data
-	
-	#if [[ -f data_files/oneDayTemp_${Quality}_${city}.txt ]]
-		#echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
-		#cd ${base}/bash_scripts
-		#cleanup.sh ${city} ${Quality}
-	#else
-		#echo "Data file exist already"
-	#fi
-	
-	##run corresponding root script
-	
-	#moonTemp_final ${city} ${Quality}
-	#cd ${base}/root_scripts/root_q${Option}
+	cd ${base}/root_scripts/root_q${Option}
 	#root
 	#project()
 	#.q
-	#mv newpicture.jpg ${output}
-	#xdg-open ${output} 
-#else 
-	#echo "Invalid Option"
-	#exit 1
-#fi
+	cd ${base}/pictures
+	mv newpicture.jpg ${output}
+	xdg-open ${output} 
+
+elif (( ${Option} == "3" ));
+then 
+
+	###Exercise 3
+	city="Lund"
+	
+	#decide Quality
+	
+	echo "Do you want to only include high Quality data?[y/n]"
+	read qualitychoice
+	if [[ ${qualitychoice} == "y" ]];
+	then 
+		Quality="highQuality"
+	else if [[ ${qualitychoice} == "n" ]];
+	then
+		Quality="allEntries"
+	else 
+		echo "Invalid Input"
+		exit 1
+	fi
+	
+	output=Q${1}_${city}_${Quality}.jpg
+	
+	#cleanup/prepare data
+	
+	if [[ -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]
+		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
+		cd ${base}/bash_scripts
+		./cleanup.sh ${city} ${Quality}
+		cd ${base}
+	else
+		echo "Data file exist already"
+	fi
+	
+	#run corresponding root script
+	
+	moonTemp_final ${city} ${Quality}
+	cd ${base}/root_scripts/root_q${Option}
+	#root
+	#project()
+	#.q
+	mv newpicture.jpg ${output}
+	xdg-open ${output} 
+else 
+	echo "Invalid Option"
+	exit 1
+fi
