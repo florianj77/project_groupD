@@ -11,6 +11,7 @@
 #include <TH1.h>
 #include <TGraph.h>
 #include <TCanvas.h>
+#include <TMultiGraph.h>
 //using namespace std;
 tempTrender::tempTrender(string filePath) {
 	//cout << "The user supplied " << filePath << " as the path to the data file." << endl;
@@ -26,9 +27,14 @@ void tempTrender::hotCold(){
 	
 	TGraph* graph = new TGraph("../coldestday_Lund.txt");
 	TGraph* graph1 = new TGraph("../hottestday_Lund.txt");
+	TMultiGraph *mg = new TMultiGraph(); 
+	mg -> Add(graph);
+	mg -> Add(graph1);
+	mg->Draw("a");
+	//graph->CreateTMultiGraph(graph, graph1);
 	
-	graph1->Draw();
-	graph->Draw();
+	//graph->Draw(graph);
+	//graph1->Draw("same");
 	
 	//double mean = hist->GetMean(); //The mean of the distribution
 	//double stdev = hist->GetRMS(); //The standard deviation
