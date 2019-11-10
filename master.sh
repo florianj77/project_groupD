@@ -15,7 +15,6 @@ Exit: Exit the program [4]"
 
 
 read Option
-
 base=`pwd`
 echo ${base}
 if [ ${Option} == "1" ]; then
@@ -37,7 +36,7 @@ if [ ${Option} == "1" ]; then
 	
 	#decide Quality
 
-	echo "Do you want to only inculde high Quality data?[y/n]"
+	echo "Do you want to only include high Quality data?[y/n]"
 	read qualitychoice
 	if [[ ${qualitychoice} == "y" ]];
 	then 
@@ -70,8 +69,32 @@ if [ ${Option} == "1" ]; then
 	cd ${base}/root_scripts/question${Option}
 	echo "Please specify the month [1-12]"
 	read month
-	echo "Please specify the day"
+	#case ${month} in 
+	#[1-12]*)
+		#echo "so far so good"
+		#break
+		#;;
+	#*)
+		#echo "invalid option"
+		#exit 1
+		#;;
+	#esac
+	
+	#if [[ ${month} != [!1-12] ]] && [ ${month} != 1 ] && [ ${month} != 2 ] && [ ${month} != 12]; then
+		#echo "invalid option"
+		#exit 1
+	#fi
+	echo "Please specify the day [1-(30/31)]"
 	read day
+	#if [[ ${day} != [!1-31] ]]; then
+		#echo "score"
+	#fi
+	#if [[ ${day} != [!1-31] ]] || ([ ${day} == 31 ] && ([ ${month} == 4 ] || [ ${month} == 6 ] || [ ${month} == 8 ] || [ ${month} == 11 ])) || ([ ${month} == 2 ] && [[ ${day} == [!30-31] ]]); then
+		#echo "invalid option"
+		#exit 1
+	#fi
+	#echo "you made it"
+	#exit 1
 	echo "
 	#include \"tempTrender.h\"
 	#include <string>
@@ -90,23 +113,25 @@ if [ ${Option} == "1" ]; then
 		//t.tempPerYear(2050);
 		
 	}" > project.cpp
-	root
-	#root -b -l -q 'project();'
+	root -b -l <<-EOF
+	project()
+	.q
+	EOF
 	output=Q${Option}_${city}_${Quality}_${month}_${day}.jpg
 	cd ${base}/pictures
 	mv newpicture.jpg ${output}
 	xdg-open ${output}
-	
+	cd ${base}
 
 elif [ ${Option} -eq "2" ]; then
-	echo "hi"
+
 
 ####Exercise 2
 
 	#decide which city
 	echo "For what city should this exercise be done?(Please enter just the city name: [City])
 	OPTIONS:
-	Boras Falsterbo Falun Lulea Lund Karlstad Soderarm Umea Visby\n"
+	Boras Falsterbo Falun Lulea Lund Karlstad Soderarm Umea Visby"
 	read city
 	
 	if [[ ${city} != "Lund" && ${city} != "Boras" && ${city} != "Falsterbo" && ${city} != "Falun" && ${city} != "Lulea"
@@ -137,7 +162,7 @@ elif [ ${Option} -eq "2" ]; then
 	#cleanup/prepare data
 	
 	if [[ ! -f ${base}/data_files/oneDayTemp_${Quality}_${city}.txt ]]; then
-		echo "Prepare the date for ${city}: (this can take a up to 5 minutes):"
+		echo "Prepare the data for ${city}: (this can take a up to 5 minutes):"
 		cd ${base}/bash_scripts
 		./cleanup.sh ${city} ${Quality}
 		cd ${base}
@@ -218,12 +243,15 @@ elif [ ${Option} -eq "2" ]; then
 		
 	}" > tempTrender2.cpp
 	
-	root
-	#project()
-	#.q
+	root -b -l <<-EOF
+	project()
+	.q
+	EOF
+
 	cd ${base}/pictures
 	mv newpicture.jpg ${output}
 	xdg-open ${output} 
+	cd ${base}
 
 elif [ ${Option} == "3" ]; then 
 
@@ -285,12 +313,15 @@ elif [ ${Option} == "3" ]; then
 		
 	}" > project_moon.cpp
 
-	root
-	#project()
-	#.q
+	root -b -l <<-EOF
+	project()
+	.q
+	EOF
+	
 	cd ${base}/pictures
 	mv newpicture.jpg ${output}
-	xdg-open ${output} 
+	xdg-open ${output}
+	cd ${base} 
 else 
 	echo "Invalid Option"
 	exit 1

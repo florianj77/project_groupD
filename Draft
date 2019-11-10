@@ -1,0 +1,45 @@
+Introduction 
+
+
+The Swedish climate is influenced by the Gulf Stream and the weather can vary quite a bit in the long stretched country. Milder winters can occur in the south, while the temperature can drop below -30 C up in the north. In addition, February is usually the coldest month in Sweden. Back in the days, people believed that the moon phase would affect the weather. When certain lunar maria were visible, good weather was predicted, while other visible maria suggested bad weather. Due to the fact that Sweden’s weather seems to be very divers, many questions arise. 
+
+The first question is how the average temperature differs throughout the country on a given day, in the northern part, the central part and the Southern part in a period of roughly 50 years. It is expected that the frequency of the average temperature will be higher at a lower degree in the North and at a higher degree in the South, since the Northern part is at a higher latitude. In addition, climate change may have resulted in higher average temperatures over the years.  
+
+The second question covers what the hottest and the coldest temperature is per year in both Karlstad and Lund and compare those. It is expected that the coldest temperature is lower in Karlstad and the hottest temperature is higher in Lund. 
+
+The final question is whether there is a relation in Lund between the average temperature per day in a moon cycle, compared to the moon phase in the year 2014. According to the old folklore, the average temperature per day per moon cycle will follow a similar pattern as the moon phase. 
+
+
+Methods
+
+
+In order to clean up the provided data and to structure it into the desired data, a bash script named cleanup.sh was used. This calculated the average temperature per day per year. 
+
+For the first question, the function tempOnDay made a histogram of the average temperature in a given city on a given date and plotted the frequencies. This was done for the Northern part Lulea, the central part Karlstad and the Southern part Lund. 
+
+For the second question, the bash scripts coldestday.sh and hottestday.sh extracted the coldest and hottest temperature per year to new text files, respectively. This data was then combined and plotted in one graph, which displayed the coldest and highest temperature per year, in Karlstad and Lund. 
+
+The final question 
+
+
+
+1. Split year in moon cycles
+
+2. Highest and lowest temperature per month > convert to %
+
+Try to find a connection between the moon cycle and temperature peaks
+
+To reach the goal we did:
+
+.) create a bash script (moonTemp.sh) which mkaes a file containing the date, temperature in percent and the moon cycle status (percent)
+
+-> work in progress
+
+1.	.) implement root function -> work in progress
+
+Results
+
+Discussion 
+
+
+ 
